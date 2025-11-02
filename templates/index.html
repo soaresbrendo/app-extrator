@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrator de Pedidos PDF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-file-pdf"></i> Extrator de Pedidos PDF</h1>
+            <p>Sistema para extrair informações de pedidos de compras</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Seção de Upload -->
+            <div class="card upload-section">
+                <div class="card-header">
+                    <h2><i class="fas fa-upload"></i> Upload do PDF</h2>
+                    <p>Faça upload do PDF do pedido de compras para extrair as informações</p>
+                </div>
+                <div class="card-content">
+                    <div class="file-upload-area" id="fileUploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Clique aqui ou arraste o arquivo PDF</p>
+                        <input type="file" id="pdfFile" accept=".pdf" hidden>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo" style="display: none;">
+                        <i class="fas fa-file-pdf"></i>
+                        <span id="fileName"></span>
+                        <span id="fileSize"></span>
+                    </div>
+
+                    <button class="btn btn-primary" id="extractBtn" disabled>
+                        <i class="fas fa-magic"></i>
+                        Extrair Informações
+                    </button>
+                </div>
+            </div>
+
+            <!-- Seção de Status -->
+            <div class="card status-section hidden" id="statusSection">
+                <div class="card-header">
+                    <h2><i class="fas fa-cog fa-spin"></i> Processando</h2>
+                    <p>O sistema está analisando o documento...</p>
+                </div>
+                <div class="card-content">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Resultados -->
+            <div class="card results-section hidden" id="resultsSection">
+                <div class="card-header">
+                    <h2><i class="fas fa-check-circle"></i> Dados Extraídos</h2>
+                    <div class="header-buttons">
+                        <button class="btn btn-warning" id="editBtn">
+                            <i class="fas fa-edit"></i>
+                            Editar e Baixar Excel
+                        </button>
+                        <button class="btn btn-success" id="downloadBtn">
+                            <i class="fas fa-download"></i>
+                            Baixar Excel Direto
+                        </button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <!-- Adicionado split screen com dados e PDF lado a lado -->
+                    <div class="split-view">
+                        <div class="data-panel">
+                            <h3 style="margin-bottom: 20px; color: #495057;">
+                                <i class="fas fa-table"></i> Produtos Extraídos
+                            </h3>
+                            <div id="dataPanel">
+                                <!-- Dados serão inseridos aqui -->
+                            </div>
+                        </div>
+                        <div class="pdf-panel">
+                            <h3 style="margin-bottom: 20px; color: #495057;">
+                                <i class="fas fa-file-pdf"></i> Visualizar PDF
+                            </h3>
+                            <div class="pdf-controls">
+                                <label for="pedidoSelector" style="font-weight: 600;">Selecionar Pedido:</label>
+                                <select id="pedidoSelector" class="pedido-selector">
+                                    <option value="">Selecione um pedido</option>
+                                </select>
+                            </div>
+                            <div class="pdf-viewer">
+                                <div class="pdf-placeholder">
+                                    <i class="fas fa-file-pdf" style="font-size: 3rem; margin-bottom: 15px; display: block; color: #ddd;"></i>
+                                    Selecione um pedido para visualizar o PDF
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Erro -->
+            <div class="card error-section hidden" id="errorSection">
+                <div class="card-header error-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Erro</h2>
+                </div>
+                <div class="card-content">
+                    <p id="errorMessage"></p>
+                    <button class="btn btn-secondary" onclick="resetForm()">
+                        <i class="fas fa-redo"></i>
+                        Tentar Novamente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Contextual -->
+    <div id="contextMenu" class="context-menu">
+        <div class="context-menu-item" data-action="above">
+            <i class="fas fa-arrow-up"></i> Adicionar linha acima
+        </div>
+        <div class="context-menu-item" data-action="below">
+            <i class="fas fa-arrow-down"></i> Adicionar linha abaixo
+        </div>
+        <!-- Adicionada opção de excluir linha -->
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item context-menu-item-delete" data-action="delete">
+            <i class="fas fa-trash"></i> Excluir linha
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
