@@ -1,5 +1,5 @@
 # Core Flask dependencies
-Flask==3.1.2
+Flask==3.0.3
 Werkzeug==3.0.3
 
 # PDF processing - using PyPDF2 (pure Python, no compilation needed)
@@ -15,4 +15,5 @@ gunicorn==22.0.0
 # Additional dependencies
 python-dateutil==2.8.2
 pytz==2024.1
+
 
