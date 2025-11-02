@@ -269,4 +269,12 @@ def get_pdf():
         print(f"Erro ao recuperar PDF: {e}")
         return jsonify({'error': 'Erro ao recuperar PDF'}), 500
 
+# Configuração de porta para produção
 port = int(os.environ.get('PORT', 5000))
+
+# Para desenvolvimento local, descomente as linhas abaixo:
+# if __name__ == '__main__':
+#     print("🚀 Iniciando Extrator de Pedidos PDF")
+#     print(f"🌐 Acesse: http://localhost:{port}")
+#     print("-" * 60)
+#     app.run(debug=True, host='0.0.0.0', port=port)
