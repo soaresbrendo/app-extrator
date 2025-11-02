@@ -1,5 +1,17 @@
-Flask==3.0.0
+# Core Flask dependencies
+Flask==3.0.4
+Werkzeug==3.0.3
+
+# PDF processing - using PyPDF2 (pure Python, no compilation needed)
 PyPDF2==3.0.1
-pandas==2.1.0
+
+# Excel generation
+pandas==2.1.4
 openpyxl==3.1.2
-gunicorn==21.2.0
+
+# Production server
+gunicorn==22.0.0
+
+# Additional dependencies
+python-dateutil==2.8.2
+pytz==2024.1
